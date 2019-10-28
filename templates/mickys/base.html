@@ -9,6 +9,14 @@
         <li><a href="{%url 'index'%} ">MicksyBite</a></li>
         <li><a href="{% url 'admin:index'%} ">Admin</a></li>
         <li><a href="{%url 'mickys:register'%} ">Register</a></li>
+        {%  if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a> </li>
+
+         {% else %}
+
+             <li><a href="{% url 'mickys:user_login' %}">Login</a> </li>
+        {% endif %}
+
     </ul>
 </body>
 </html>

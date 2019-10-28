@@ -20,5 +20,7 @@ from mickys import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('mickys/', include('mickys.urls'))
+    path('mickys/', include('mickys.urls')),
+    path('logout/', views.user_logout, name='logout'),
+    path('special/', views.special, name='special')
 ]
