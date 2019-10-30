@@ -12,3 +12,18 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=100, blank=True)
+    product_price = models.IntegerField()
+    product_description = models.CharField(max_length=200, blank=True)
+    date_added = models.DateTimeField()
+
+    def __str__(self):
+        return self.product_name
+
+
+
+
+
+
