@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from .models import UserProfile
+from .models import UserProfile, Product
 from django.contrib.auth.models import User
-from .forms import UserForm, UserProfileForms
+from .forms import UserForm, UserProfileForms, ProductForm
+from django.shortcuts import redirect, get_object_or_404
 
 from django.contrib.auth import authenticate, logout, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -76,3 +77,48 @@ def user_login(request):
             return HttpResponse('invalid details')
     else:
         return render(request, 'mickys/login.html', {})
+
+
+
+def get_product(request):
+    all_product = Product.objects.all()
+    context = {'all_product': all_product}
+
+    return render(request, '', context)
+
+
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('#product_home_page')
+
+        else:
+            form = ProductForm()
+            context = {'form':form}
+            return render(request, 'add_product_page', context)
+
+
+def update_product(request):
+    product = get_object_or_404(Product, pk=id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('Product page')
+
+    else:
+        form = ProductForm(instance=product)
+        context = {'form':form}
+        return render(request, 'update_product', context)
+
+
+def delete(request):
+    product = get_object_or_404(Product, pk=id)
+    product.delete()
+
+    return redirect('product page')
+
+
+

@@ -15,3 +15,8 @@ class UserProfileForms(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('mobile_number',)
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        fields = '__all__'
